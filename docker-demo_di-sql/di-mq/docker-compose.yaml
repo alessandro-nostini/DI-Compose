@@ -1,0 +1,55 @@
+version: '3'
+services:
+
+  hc-di-mq-a:
+    image: "biztalkless.azurecr.io/hc-di-mq-demo:v1-win-ltsc2019"
+    hostname: "hc-di-mq-a"
+    ports:
+      - "15672:15672"
+      - "5671:5671"
+      - "5672:5672"
+    environment:
+      RABBITMQ_ERLANG_COOKIE: RRPDFVDXNBDUQFXXRBJH
+    volumes:
+      - F:/DockerVolumes/hc-di-mq-a:C:/data/
+    restart: always
+
+  hc-di-mq-b:
+    image: "biztalkless.azurecr.io/hc-di-mq-demo:v1-win-ltsc2019"
+    hostname: "hc-di-mq-b"
+    ports:
+      - "15673:15672"
+      - "5673:5671"
+      - "5674:5672"
+    environment:
+      RABBITMQ_ERLANG_COOKIE: RRPDFVDXNBDUQFXXRBJH
+    volumes:
+      - F:/DockerVolumes/hc-di-mq-b:C:/data/
+    restart: always
+
+  hc-di-mq-c:
+    image: "biztalkless.azurecr.io/hc-di-mq-demo:v1-win-ltsc2019"
+    hostname: "hc-di-mq-c"
+    ports:
+      - "15674:15672"
+      - "5675:5671"
+      - "5676:5672"
+    environment:
+      RABBITMQ_ERLANG_COOKIE: RRPDFVDXNBDUQFXXRBJH
+    volumes:
+      - F:/DockerVolumes/hc-di-mq-c:C:/data/
+    restart: always
+
+  hc-di-mq-nginx:
+    image: "biztalkless.azurecr.io/hc-nginx-1.23-win-ltsc2019"
+    deploy:
+      replicas: 1
+    tty: true
+    ports:
+      - "8672:15672"
+    restart: always
+
+networks:
+  default:
+    name: nat
+    external: true

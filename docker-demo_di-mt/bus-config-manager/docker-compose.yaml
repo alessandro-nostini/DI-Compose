@@ -1,0 +1,21 @@
+version: '3'
+services:
+
+  host:
+    image: "biztalkless.azurecr.io/bus-config-manager:v1-win-nano-1809"
+    deploy:
+      replicas: 1
+    environment:
+      - StartupLogger__LoggingUrl=http://di-demo-seq-1.progel.org:5341
+      - StartupLogger__LoggingApiKey=a6XHd6DCjKSe7rHB2L4X
+      - ApplicationInsights__InstrumentationKey=137d619d-c491-40b7-ad25-b33124a14470
+      - Bus__HostName=di-demo-mq-1.progel.org
+      - Bus__UserName=configManager
+      - Bus__Virtual=config
+      - Bus__Password=aa1234BB
+      - ConnectionStrings__DefaultConnection=Data Source=di-demo-sql-1.progel.org;Initial Catalog=DiConfig;User ID=CONFIG_DA_BUS;Password=aa1234BB;Application Name=CONFIG_DA_BUS
+
+networks:
+  default:
+    name: nat
+    external: true

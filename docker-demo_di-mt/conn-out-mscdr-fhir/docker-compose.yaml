@@ -1,0 +1,47 @@
+version: '3'
+services:
+
+  conn-out-mscdr-fhir-dwh:
+    image: "biztalkless.azurecr.io/conn-out-mscdr-fhir-dwh:v1-win-nano-1809"
+    deploy:
+      replicas: 1
+    environment:
+      - StartupLogger__LoggingUrl=http://di-demo-seq-1.progel.org:5341
+      - StartupLogger__LoggingApiKey=a6XHd6DCjKSe7rHB2L4X
+      - ApplicationInsights__InstrumentationKey=137d619d-c491-40b7-ad25-b33124a14470
+      - BusConfig__HostName=di-demo-mq-1.progel.org
+      - BusConfig__UserName=configClient
+      - BusConfig__Password=aa1234BB
+      - Settings__ConsumeReferti=true
+      - Settings__ConsumeEventi=true
+
+  conn-out-mscdr-fhir-sac:
+    image: "biztalkless.azurecr.io/conn-out-mscdr-fhir-sac:v1-win-nano-1809"
+    deploy:
+      replicas: 1
+    environment:
+      - StartupLogger__LoggingUrl=http://di-demo-seq-1.progel.org:5341
+      - StartupLogger__LoggingApiKey=a6XHd6DCjKSe7rHB2L4X
+      - ApplicationInsights__InstrumentationKey=137d619d-c491-40b7-ad25-b33124a14470
+      - BusConfig__HostName=di-demo-mq-1.progel.org
+      - BusConfig__UserName=configClient
+      - BusConfig__Password=aa1234BB
+      - Settings__ConsumePazienti=true
+      
+  conn-out-mscdr-fhir-demosite:
+    image: "biztalkless.azurecr.io/conn-out-mscdr-fhir-demosite:v1-win-nano-1809"
+    deploy:
+      replicas: 1
+    ports:
+      - 8011:80
+    environment:
+     - Settings__Fhir_Url=https://hc4fhir-rel4.fhir.azurehealthcareapis.com
+     - Settings__AzureTenantId=97877fab-d3d2-4424-bbb9-2423276e5f58
+     - Settings__AzureApplicationId=fb9b1645-8b35-4779-bcc6-81056e5a007c
+     - Settings__AzureApplicationSecret=HSs8Q~nSOW1Yuw_KyKUdlrwcu6d-ct5uvn3wPc9g
+     - Settings__AzureApplicationSecret_ExpiresOn=26/09/2024
+
+networks:
+  default:
+    name: nat
+    external: true

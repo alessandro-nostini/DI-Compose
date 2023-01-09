@@ -1,0 +1,15 @@
+version: '3'
+services:
+
+  hc-di-seq:
+    image: "biztalkless.azurecr.io/seq:20221-win-ltsc2019"
+    ports:
+      - "5341:5341"
+    volumes:
+      - F:/DockerVolumes/hc-di-seq:c:\programdata\seq
+    restart: always
+
+networks:
+  default:
+    name: nat
+    external: true

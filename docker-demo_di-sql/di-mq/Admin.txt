@@ -1,0 +1,3 @@
+docker-compose exec -it hc-di-mq-a rabbitmqctl.bat add_user "admin" "User4deV_User4deV"
+docker-compose exec -it hc-di-mq-a rabbitmqctl.bat set_permissions -p "/" "admin" .* .* .*
+docker-compose exec -it hc-di-mq-a rabbitmqctl.bat set_user_tags "admin" administrator

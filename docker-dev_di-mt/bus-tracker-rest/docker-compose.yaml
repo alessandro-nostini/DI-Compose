@@ -1,0 +1,18 @@
+﻿version: '3'
+services:
+
+  bus-tracker-rest:
+    image: "biztalkless.azurecr.io/bus-tracker-rest:v1-win-nano-1809"
+    deploy:
+      replicas: 1
+    environment:
+      # Non usa CONFIG MANAGER ne STARTUP LOGGER.
+      - SeqUrl=http://di-bt-1.progel.org:5341
+      - SeqApiKey=a6XHd6DCjKSe7rHB2L4X
+    ports:
+      - 5352:80
+
+networks:
+  default:
+    name: nat
+    external: true

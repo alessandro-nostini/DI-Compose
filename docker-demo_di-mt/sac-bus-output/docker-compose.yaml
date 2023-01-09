@@ -1,0 +1,20 @@
+version: '3'
+services:
+
+  host-send-pazienti:
+    image: "biztalkless.azurecr.io/sac-bus-host-send:v1-win-nano-1809"
+    deploy:
+      replicas: 1
+    environment:
+      - StartupLogger__LoggingUrl=http://di-demo-seq-1.progel.org:5341
+      - StartupLogger__LoggingApiKey=a6XHd6DCjKSe7rHB2L4X
+      - ApplicationInsights__InstrumentationKey=137d619d-c491-40b7-ad25-b33124a14470
+      - BusConfig__HostName=di-demo-mq-1.progel.org
+      - BusConfig__UserName=configClient
+      - BusConfig__Password=aa1234BB
+      - Settings__PublishPazienti=true
+
+networks:
+  default:
+    name: nat
+    external: true

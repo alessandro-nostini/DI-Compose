@@ -1,0 +1,71 @@
+﻿version: '3'
+services:
+
+  bus-fault-consumer-dwh:
+    image: "biztalkless.azurecr.io/bus-fault-consumer:v1-win-nano-1809"
+    deploy:
+      replicas: 1
+    environment:
+      - StartupLogger__LoggingUrl=http://di-bt-1.progel.org:5341
+      - StartupLogger__LoggingApiKey=a6XHd6DCjKSe7rHB2L4X
+      - ApplicationInsights__InstrumentationKey=137d619d-c491-40b7-ad25-b33124a14470
+      - BusConfig__HostName=di-mq-1.progel.org
+      - BusConfig__UserName=configClient
+      - BusConfig__Password=aa1234BB
+      - Bus__HostName=di-mq-1.progel.org
+      - Bus__Virtual=dwh
+      - Bus__UserName=dwh
+      - Bus__Password=aa1234BB
+
+  bus-fault-consumer-oe:
+    image: "biztalkless.azurecr.io/bus-fault-consumer:v1-win-nano-1809"
+    deploy:
+      replicas: 1
+    environment:
+      - StartupLogger__LoggingUrl=http://di-bt-1.progel.org:5341
+      - StartupLogger__LoggingApiKey=a6XHd6DCjKSe7rHB2L4X
+      - ApplicationInsights__InstrumentationKey=137d619d-c491-40b7-ad25-b33124a14470
+      - BusConfig__HostName=di-mq-1.progel.org
+      - BusConfig__UserName=configClient
+      - BusConfig__Password=aa1234BB
+      - Bus__HostName=di-mq-1.progel.org
+      - Bus__Virtual=oe
+      - Bus__UserName=oe
+      - Bus__Password=aa1234BB
+
+  bus-fault-consumer-sac:
+    image: "biztalkless.azurecr.io/bus-fault-consumer:v1-win-nano-1809"
+    deploy:
+      replicas: 1
+    environment:
+      - StartupLogger__LoggingUrl=http://di-bt-1.progel.org:5341
+      - StartupLogger__LoggingApiKey=a6XHd6DCjKSe7rHB2L4X
+      - ApplicationInsights__InstrumentationKey=137d619d-c491-40b7-ad25-b33124a14470
+      - BusConfig__HostName=di-mq-1.progel.org
+      - BusConfig__UserName=configClient
+      - BusConfig__Password=aa1234BB
+      - Bus__HostName=di-mq-1.progel.org
+      - Bus__Virtual=sac
+      - Bus__UserName=sac
+      - Bus__Password=aa1234BB
+
+  bus-fault-consumer-config:
+    image: "biztalkless.azurecr.io/bus-fault-consumer:v1-win-nano-1809"
+    deploy:
+      replicas: 1
+    environment:
+      - StartupLogger__LoggingUrl=http://di-bt-1.progel.org:5341
+      - StartupLogger__LoggingApiKey=a6XHd6DCjKSe7rHB2L4X
+      - ApplicationInsights__InstrumentationKey=137d619d-c491-40b7-ad25-b33124a14470
+      - BusConfig__HostName=di-mq-1.progel.org
+      - BusConfig__UserName=configClient
+      - BusConfig__Password=aa1234BB
+      - Bus__HostName=di-mq-1.progel.org
+      - Bus__Virtual=config
+      - Bus__UserName=configManager
+      - Bus__Password=aa1234BB
+
+networks:
+  default:
+    name: nat
+    external: true

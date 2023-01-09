@@ -1,0 +1,95 @@
+version: '3'
+services:
+
+  host-process-referti:
+    image: "biztalkless.azurecr.io/dwh-bus-hostprocess:v1-win-ltsc2019"
+    deploy:
+      replicas: 1
+    environment:
+      - StartupLogger__LoggingUrl=http://di-bt-1.progel.org:5341
+      - StartupLogger__LoggingApiKey=a6XHd6DCjKSe7rHB2L4X
+      - ApplicationInsights__InstrumentationKey=137d619d-c491-40b7-ad25-b33124a14470
+      - BusConfig__HostName=di-mq-1.progel.org
+      - BusConfig__UserName=configClient
+      - BusConfig__Password=aa1234BB
+      - Settings__ConsumeReferti=true
+      - Settings__ConsumeEventi=false
+      - Settings__ConsumeNoteAnam=false
+      - Settings__ConsumePrescrizioni=false
+
+  host-process-eventi:
+    image: "biztalkless.azurecr.io/dwh-bus-hostprocess:v1-win-ltsc2019"
+    deploy:
+      replicas: 1
+    environment:
+      - StartupLogger__LoggingUrl=http://di-bt-1.progel.org:5341
+      - StartupLogger__LoggingApiKey=a6XHd6DCjKSe7rHB2L4X
+      - ApplicationInsights__InstrumentationKey=137d619d-c491-40b7-ad25-b33124a14470
+      - BusConfig__HostName=di-mq-1.progel.org
+      - BusConfig__UserName=configClient
+      - BusConfig__Password=aa1234BB
+      - Settings__ConsumeReferti=false
+      - Settings__ConsumeEventi=true
+      - Settings__ConsumeNoteAnam=false
+      - Settings__ConsumePrescrizioni=false
+
+  host-process-noteanam:
+    image: "biztalkless.azurecr.io/dwh-bus-hostprocess:v1-win-ltsc2019"
+    deploy:
+      replicas: 1
+    environment:
+      - StartupLogger__LoggingUrl=http://di-bt-1.progel.org:5341
+      - StartupLogger__LoggingApiKey=a6XHd6DCjKSe7rHB2L4X
+      - ApplicationInsights__InstrumentationKey=137d619d-c491-40b7-ad25-b33124a14470
+      - BusConfig__HostName=di-mq-1.progel.org
+      - BusConfig__UserName=configClient
+      - BusConfig__Password=aa1234BB
+      - Settings__ConsumeReferti=false
+      - Settings__ConsumeEventi=false
+      - Settings__ConsumeNoteAnam=true
+      - Settings__ConsumePrescrizioni=false
+
+  host-process-prescrizioni:
+    image: "biztalkless.azurecr.io/dwh-bus-hostprocess:v1-win-ltsc2019"
+    deploy:
+      replicas: 1
+    environment:
+      - StartupLogger__LoggingUrl=http://di-bt-1.progel.org:5341
+      - StartupLogger__LoggingApiKey=a6XHd6DCjKSe7rHB2L4X
+      - ApplicationInsights__InstrumentationKey=137d619d-c491-40b7-ad25-b33124a14470
+      - BusConfig__HostName=di-mq-1.progel.org
+      - BusConfig__UserName=configClient
+      - BusConfig__Password=aa1234BB
+      - Settings__ConsumeReferti=false
+      - Settings__ConsumeEventi=false
+      - Settings__ConsumeNoteAnam=false
+      - Settings__ConsumePrescrizioni=true
+
+  host-receive-referti:
+    image: "biztalkless.azurecr.io/dwh-bus-host-receive-referti:v1-win-nano-1809"
+    deploy:
+      replicas: 1
+    environment:
+      - StartupLogger__LoggingUrl=http://di-bt-1.progel.org:5341
+      - StartupLogger__LoggingApiKey=a6XHd6DCjKSe7rHB2L4X
+      - ApplicationInsights__InstrumentationKey=137d619d-c491-40b7-ad25-b33124a14470
+      - BusConfig__HostName=di-mq-1.progel.org
+      - BusConfig__UserName=configClient
+      - BusConfig__Password=aa1234BB
+
+  host-receive-eventi:
+    image: "biztalkless.azurecr.io/dwh-bus-host-receive-eventi:v1-win-nano-1809"
+    deploy:
+      replicas: 1
+    environment:
+      - StartupLogger__LoggingUrl=http://di-bt-1.progel.org:5341
+      - StartupLogger__LoggingApiKey=a6XHd6DCjKSe7rHB2L4X
+      - ApplicationInsights__InstrumentationKey=137d619d-c491-40b7-ad25-b33124a14470
+      - BusConfig__HostName=di-mq-1.progel.org
+      - BusConfig__UserName=configClient
+      - BusConfig__Password=aa1234BB
+
+networks:
+  default:
+    name: nat
+    external: true

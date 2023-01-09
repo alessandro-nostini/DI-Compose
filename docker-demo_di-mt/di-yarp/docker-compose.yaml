@@ -1,0 +1,24 @@
+version: '3'
+services:
+
+  hc-di-user-yarp:
+    user: "ContainerAdministrator"
+    image: "biztalkless.azurecr.io/hc-di-yarp-b2c:v1-win-nano-1809"
+    deploy:
+      replicas: 1
+    ports:
+      - "44380:443"
+    environment:
+      - ASPNETCORE_URLS=https://+;http://+
+      - ASPNETCORE_HTTPS_PORT=44380
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=aa1234BB
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=c:\https\hc_4wardpro_it.pfx
+      - Yarp__UrlProxyTo=http://hc-di-user
+    volumes:
+       - C:\DockerVolumes\_https:c:\https:rw
+    restart: always
+
+networks:
+  default:
+    name: nat
+    external: true

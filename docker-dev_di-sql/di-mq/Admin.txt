@@ -1,0 +1,17 @@
+docker-compose exec -it hc-di-mq-a rabbitmqctl.bat add_user "admin" "User4deV_User4deV"
+docker-compose exec -it hc-di-mq-a rabbitmqctl.bat set_permissions -p "/" "admin" .* .* .*
+docker-compose exec -it hc-di-mq-a rabbitmqctl.bat set_user_tags "admin" administrator
+
+rem ****************************************
+
+docker-compose exec -it hc-di-mq-a rabbitmqctl.bat add_user "nostia" "9a55f70a841f18b97c3a7db939b7adc9e34a0f1d"
+docker-compose exec -it hc-di-mq-a rabbitmqctl.bat set_permissions -p "/" "nostia" ".*" ".*" ".*"
+docker-compose exec -it hc-di-mq-a rabbitmqctl.bat set_user_tags "nostia" administrator
+
+rem ****************************************
+
+docker-compose exec -it hc-di-mq-a rabbitmqctl.bat add_user "rizzol" "9a55f70a841f18b97c3a7db939b7adc9e34a0f1d"
+docker-compose exec -it hc-di-mq-a rabbitmqctl.bat set_permissions -p "/" "rizzol" ".*" ".*" ".*"
+docker-compose exec -it hc-di-mq-a rabbitmqctl.bat set_user_tags "rizzol" administrator
+
+

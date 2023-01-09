@@ -1,0 +1,63 @@
+# EventBus common
+
+cd bus-fault-consumer
+docker-compose stop
+docker-compose rm -f
+docker-compose pull   
+docker-compose up -d
+cd ..
+
+cd bus-tracker-rest
+docker-compose stop
+docker-compose rm -f
+docker-compose pull   
+docker-compose up -d
+cd ..
+
+
+# ConfigManager
+
+cd bus-config-manager
+docker-compose stop
+docker-compose rm -f
+docker-compose pull   
+docker-compose up -d
+cd ..
+
+
+# Dwh EventBus
+
+cd dwh-bus-input
+docker-compose stop
+docker-compose rm -f
+docker-compose pull   
+docker-compose up -d
+cd ..
+
+cd dwh-bus-output
+docker-compose stop
+docker-compose rm -f
+docker-compose pull   
+docker-compose up -d
+cd ..
+
+
+# Sac EventBus
+
+cd sac-bus-output
+docker-compose stop
+docker-compose rm -f
+docker-compose pull   
+docker-compose up -d
+cd ..
+
+
+# Connettori
+
+cd conn-out-mscdr-fhir
+docker-compose stop
+docker-compose rm -f
+docker-compose pull   
+docker-compose up -d
+cd ..
+

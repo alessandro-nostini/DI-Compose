@@ -1,0 +1,21 @@
+version: '3'
+services:
+
+  hc-di-sql:
+    image: "biztalkless.azurecr.io/hc-di-sql-demo:v1-win-ltsc2019"
+    deploy:
+      replicas: 1
+    ports:
+      - "1439:1433"
+    environment:
+      - sa_password=aa1234BB
+      - ACCEPT_EULA=Y
+      - attach_dbs=[]
+    volumes:
+      - F:/DockerVolumes/hc-di-sql:C:/data
+    restart: always
+
+networks:
+  default:
+    name: nat
+    external: true

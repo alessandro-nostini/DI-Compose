@@ -1,0 +1,20 @@
+version: '3'
+services:
+
+  host:
+    image: "biztalkless.azurecr.io/bus-config-manager:v1-win-nano-1809"
+    deploy:
+      replicas: 1
+    environment:
+      - StartupLogger__LoggingUrl=http://di-demo-seq-1.progel.org:5341
+      - ApplicationInsights__InstrumentationKey=137d619d-c491-40b7-ad25-b33124a14470
+      - Bus__HostName=di-mq-1.progel.org
+      - Bus__UserName=configManager
+      - Bus__Password=aa1234BB
+      - ConnectionStrings__DefaultConnection=Data Source=DI-SQL-1.progel.org\hconnect;Initial Catalog=DiConfig;User ID=CONFIG_DA_BUS;Password=aa1234BB;Application Name=CONFIG_DA_BUS
+    networks:
+      - di-network
+
+networks:
+  di-network:
+    name: h-connect-main-network
