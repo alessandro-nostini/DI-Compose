@@ -1,0 +1,24 @@
+version: '3'
+services:
+
+  test-github-yarp:
+    image: "biztalkless.azurecr.io/hc-di-yarp-b2c:v1-win-nano-1809"
+    pull_policy: always
+    deploy:
+      replicas: 1
+    ports:
+      - "44390:443"
+    environment:
+      - ASPNETCORE_URLS=https://+;http://+
+      - ASPNETCORE_HTTPS_PORT=44390
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=aa1234BB
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=c:\https\cert-localhost.pfx
+      - Yarp__UrlProxyTo=http://hc-di-admin
+    volumes:
+       - C:\DockerVolumes\https:c:\https:rw
+    restart: always
+
+networks:
+  default:
+    name: nat
+    external: true
