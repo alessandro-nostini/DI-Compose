@@ -10,7 +10,7 @@ services:
   consumer:
     image: "alessandronostini/deploy:masstransit-consumer-nanoserver-1809"
     deploy:
-      replicas: 2
+      replicas: 1
     environment:
       - Bus__HostName=rabbitmq
       - Bus__UserName=guest
@@ -20,7 +20,7 @@ services:
   producer:
     image: "alessandronostini/deploy:masstransit-producer-nanoserver-1809"
     deploy:
-      replicas: 2
+      replicas: 1
     environment:
       - Bus__HostName=rabbitmq
       - Bus__UserName=guest
