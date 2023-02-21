@@ -10,7 +10,7 @@ services:
   consumer:
     image: "alessandronostini/deploy:masstransit-consumer-nanoserver-1809"
     deploy:
-      replicas: 200
+      replicas: 10
     environment:
       - Bus__HostName=rabbitmq
       - Bus__UserName=guest
