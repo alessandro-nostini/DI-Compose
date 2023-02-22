@@ -58,7 +58,7 @@ services:
     restart: always
 
   hc-di-ws-dwh:
-    image: "biztalkless.azurecr.io/hc-di-ws-dwh:v1-win-ltsc2019"
+    image: "biztalkless.azurecr.io/hc-di-ws-dwh:v1-win-ltsc2019-auslre"
     pull_policy: always
     deploy:
       replicas: 2

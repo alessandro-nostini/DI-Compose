@@ -2,7 +2,7 @@ version: '3'
 services:
 
   hc-di-admin-yarp:
-    image: "biztalkless.azurecr.io/hc-di-yarp-b2c:v1-win-nano-1809"
+    image: "biztalkless.azurecr.io/hc-di-yarp-basic:v1-win-nano-1809"
     pull_policy: always
     deploy:
       replicas: 1
@@ -26,11 +26,12 @@ services:
     ports:
       - "8090:80"
     environment:
-      - ExtraSql=di-demo-sql-1.progel.org
+      - ExtraSql=di-sql-1.progel.org\hconnect,1437
     restart: always
 
   hc-di-user-yarp:
     image: "biztalkless.azurecr.io/hc-di-yarp-b2c:v1-win-nano-1809"
+    pull_policy: always
     deploy:
       replicas: 1
     ports:
@@ -53,40 +54,34 @@ services:
     ports:
       - "8080:80"
     environment:
-      - ExtraSql=di-demo-sql-1.progel.org
+      - ExtraSql=di-sql-1.progel.org\hconnect,1437
     restart: always
 
   hc-di-ws-dwh:
     image: "biztalkless.azurecr.io/hc-di-ws-dwh:v1-win-ltsc2019"
     pull_policy: always
     deploy:
-      replicas: 1
-    ports:
-      - "80"
+      replicas: 2
     environment:
-      - ExtraSql=di-demo-sql-1.progel.org
+      - ExtraSql=di-sql-1.progel.org\hconnect,1437
     restart: always
 
   hc-di-ws-oe:
     image: "biztalkless.azurecr.io/hc-di-ws-oe:v1-win-ltsc2019"
     pull_policy: always
     deploy:
-      replicas: 1
-    ports:
-      - "80"
+      replicas: 2
     environment:
-      - ExtraSql=di-demo-sql-1.progel.org
+      - ExtraSql=di-sql-1.progel.org\hconnect,1437
     restart: always
 
   hc-di-ws-sac:
     image: "biztalkless.azurecr.io/hc-di-ws-sac:v1-win-ltsc2019"
     pull_policy: always
     deploy:
-      replicas: 1
-    ports:
-      - "80"
+      replicas: 2
     environment:
-      - ExtraSql=di-demo-sql-1.progel.org
+      - ExtraSql=di-sql-1.progel.org\hconnect,1437
     restart: always
 
   hc-di-ws:
@@ -103,3 +98,4 @@ networks:
   default:
     name: nat
     external: true
+    
