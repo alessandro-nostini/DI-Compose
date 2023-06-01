@@ -1,0 +1,21 @@
+version: '3'
+services:
+
+  hc-di-minio-a:
+    image: "biztalkless.azurecr.io/hc-minio:2023.05.18-win-ltsc2019"
+    deploy:
+      replicas: 1
+    ports:
+      - "9000:9000"
+      - "9090:9090"
+    environment:
+      MINIO_ROOT_USER: "admin"
+      MINIO_ROOT_PASSWORD: "User4deV_User4deV"
+    volumes:
+      - F:/DockerVolumes/hc-di-minio-a:c:/data
+    restart: always
+
+networks:
+  default:
+    name: nat
+    external: true
