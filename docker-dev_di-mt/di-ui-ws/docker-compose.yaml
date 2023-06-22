@@ -83,6 +83,18 @@ services:
     environment:
       - ExtraSql=di-sql-1.progel.org\hconnect,1437
     restart: always
+    
+  hc-di-ws-s3:
+    image: "biztalkless.azurecr.io/hc-di-ws-s3:v1-win-nano-1809"
+    pull_policy: always
+    deploy:
+      replicas: 2
+    environment:
+      - ASPNETCORE_URLS=http://+
+      - ApplicationInsights__InstrumentationKey=47f2a002-85e4-4b5b-af93-bb848e0c7a4a
+      - Service__FileCacheExpiredMinute=15
+      - Service__PathBase=WS-DI-S3
+    restart: always
 
   hc-di-ws:
     image: "biztalkless.azurecr.io/di-ws-nginx:1.23.1-win-ltsc2019"
